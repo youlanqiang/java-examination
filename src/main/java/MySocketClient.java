@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.net.Socket;
 
 /**
  * author youlanqiang
@@ -27,6 +28,8 @@ public class MySocketClient extends JFrame {
     //发送按钮
     private JButton send;
 
+    private Socket socket;
+
     /**
      * Launch the application.
      */
@@ -47,6 +50,8 @@ public class MySocketClient extends JFrame {
      * Create the frame.
      */
     public MySocketClient() {
+        socket = new Socket();
+
         setTitle("客户端");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 440, 300);

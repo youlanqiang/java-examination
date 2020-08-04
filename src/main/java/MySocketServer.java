@@ -1,5 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import javax.swing.border.EmptyBorder;
 
 
@@ -23,6 +27,8 @@ public class MySocketServer extends JFrame {
     //发送
     private JButton send;
 
+    private  ServerSocket serverSocket;
+
     /**
      * Launch the application.
      */
@@ -42,7 +48,10 @@ public class MySocketServer extends JFrame {
     /**
      * Create the frame.
      */
-    public MySocketServer() {
+    public MySocketServer() throws IOException {
+        serverSocket = new ServerSocket();
+        serverSocket.bind(InetSocketAddress.createUnresolved(InetAddress.getLocalHost().getHostAddress(),33));
+
         setTitle("服务器");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 392, 300);

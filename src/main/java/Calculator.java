@@ -8,6 +8,8 @@ import java.math.RoundingMode;
 /**
  * Java实操题目
  * 基本图形编程：编写一个程序，实现一个简单的计算器界面，为该计算器加上适当的事件处理，完成计算功能。
+ * 未完成的功能:  sqrt,%,1/X
+ *
  * @author youlanqiang
  */
 public class Calculator {
@@ -19,7 +21,10 @@ public class Calculator {
 
     boolean cl;
 
+    //临时数
     BigDecimal temp = BigDecimal.ZERO;
+
+    BigDecimal memory = BigDecimal.ZERO;
 
     StringBuilder builder = new StringBuilder();
 
@@ -31,6 +36,7 @@ public class Calculator {
 
     public Calculator(){
         frame = new JFrame();
+        frame.setTitle("计算器");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setLocationRelativeTo(null);
@@ -42,12 +48,23 @@ public class Calculator {
         textField.setEditable(false);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5,4));
+        panel.setLayout(new GridLayout(7,4));
 
+
+        addOperatorAction(panel,"sqrt");
+        addCalAction(panel,"%");
+        addOperatorAction(panel,"1/X");
         addOperatorAction(panel, "EXIT");
+
+        addOperatorAction(panel,"MC");
+        addOperatorAction(panel,"MR");
+        addOperatorAction(panel,"MS");
+        addOperatorAction(panel,"M+");
+
+        addOperatorAction(panel, "CE");
         addOperatorAction(panel, "C");
         addShowHistory(panel);
-        addOperatorAction(panel, "<-");
+        addOperatorAction(panel, "Backspace");
 
         addNumberAction(panel, "7");
         addNumberAction(panel, "8");
@@ -97,6 +114,10 @@ public class Calculator {
         if("/".equals(op)){
             builder.append("/").append(value.stripTrailingZeros().toPlainString());
             value = temp.divide(value, 6, RoundingMode.HALF_UP);
+        }
+        if("%".equals(op)){
+            builder.append("%").append(value.stripTrailingZeros().toPlainString());
+            value = BigDecimal.valueOf(temp.doubleValue()%value.doubleValue());
         }
         builder.append("=").append(value.stripTrailingZeros().toPlainString()).append("\n");
         //去掉小数点后面多余的0
@@ -153,6 +174,29 @@ public class Calculator {
         button.addActionListener((e)->{
             JButton item =  (JButton)e.getSource();
             String v = item.getText();
+            if("MC".equals(v)){
+                memory = BigDecimal.ZERO;
+            }
+            if("MR".equals(v)){
+                textField.setText(memory.toString()+"");
+            }
+            if("MS".equals(v)){
+                double tempVal = Double.parseDouble(textField.getText());
+                memory = BigDecimal.valueOf(tempVal);
+            }
+            if("M+".equals(v)){
+                double tempVal = Double.parseDouble(textField.getText());
+                memory = memory.add(BigDecimal.valueOf(tempVal));
+            }
+            if("sqrt".equals(v)){
+                double tempVal = Double.parseDouble(textField.getText());
+                textField.setText(Math.sqrt(tempVal)+"");
+            }
+
+            if("1/X".equals(v)){
+                double tempVal = 1/Double.parseDouble(textField.getText());
+                textField.setText(tempVal+"");
+            }
             if("EXIT".equals(v)){
                 System.exit(-1);
             }
@@ -160,8 +204,12 @@ public class Calculator {
                 textField.setText("0");
                 op = null;
                 temp = BigDecimal.ZERO;
+                memory = BigDecimal.ZERO;
             }
-            if("<-".equals(v)){
+            if("CE".equals(v)){
+                textField.setText("0");
+            }
+            if("Backspace".equals(v)){
                 String v2 =  textField.getText();
                 if(v2.length() == 1){
                     textField.setText("0");

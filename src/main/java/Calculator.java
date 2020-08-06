@@ -52,7 +52,7 @@ public class Calculator {
 
 
         addOperatorAction(panel,"sqrt");
-        addCalAction(panel,"%");
+        addOperatorAction(panel,"%");
         addOperatorAction(panel,"1/X");
         addOperatorAction(panel, "EXIT");
 
@@ -114,10 +114,6 @@ public class Calculator {
         if("/".equals(op)){
             builder.append("/").append(value.stripTrailingZeros().toPlainString());
             value = temp.divide(value, 6, RoundingMode.HALF_UP);
-        }
-        if("%".equals(op)){
-            builder.append("%").append(value.stripTrailingZeros().toPlainString());
-            value = BigDecimal.valueOf(temp.doubleValue()%value.doubleValue());
         }
         builder.append("=").append(value.stripTrailingZeros().toPlainString()).append("\n");
         //去掉小数点后面多余的0
@@ -192,7 +188,10 @@ public class Calculator {
                 double tempVal = Double.parseDouble(textField.getText());
                 textField.setText(Math.sqrt(tempVal)+"");
             }
-
+            if("%".equals(v)){
+                double tempVal = Double.parseDouble(textField.getText())/100;
+                textField.setText(tempVal+"");
+            }
             if("1/X".equals(v)){
                 double tempVal = 1/Double.parseDouble(textField.getText());
                 textField.setText(tempVal+"");

@@ -172,29 +172,38 @@ public class Calculator {
             String v = item.getText();
             if("MC".equals(v)){
                 memory = BigDecimal.ZERO;
+                builder.append("memory clear\n");
             }
             if("MR".equals(v)){
                 textField.setText(memory.toString()+"");
+                builder.append("memory read ").append(memory.stripTrailingZeros().toPlainString()).append("\n");
             }
             if("MS".equals(v)){
                 double tempVal = Double.parseDouble(textField.getText());
                 memory = BigDecimal.valueOf(tempVal);
+                builder.append("memory save ").append(memory.stripTrailingZeros().toPlainString()).append("\n");
             }
             if("M+".equals(v)){
                 double tempVal = Double.parseDouble(textField.getText());
                 memory = memory.add(BigDecimal.valueOf(tempVal));
+                builder.append("memory add ").append(memory.stripTrailingZeros().toPlainString()).append("\n");
             }
             if("sqrt".equals(v)){
                 double tempVal = Double.parseDouble(textField.getText());
                 textField.setText(Math.sqrt(tempVal)+"");
+                builder.append(tempVal).append(" sqrt = ").append(Math.sqrt(tempVal)).append("\n");
             }
             if("%".equals(v)){
+                double tempValue = Double.parseDouble(textField.getText());
                 double tempVal = Double.parseDouble(textField.getText())/100;
                 textField.setText(tempVal+"");
+                builder.append(tempValue).append(" % = ").append(tempVal).append("\n");
             }
             if("1/X".equals(v)){
+                double tempValue = Double.parseDouble(textField.getText());
                 double tempVal = 1/Double.parseDouble(textField.getText());
                 textField.setText(tempVal+"");
+                builder.append(tempValue).append(" 1/x = ").append(tempVal).append("\n");
             }
             if("EXIT".equals(v)){
                 System.exit(-1);

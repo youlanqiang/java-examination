@@ -9,7 +9,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * author youlanqiang
+ */
 public class MyServerSocketGUI extends JFrame {
 
 

@@ -3,11 +3,7 @@ import java.util.Scanner;
 
 
 /**
- *
- * 输入八个整数，排序后存于数组中，然后再输入一个查找key键，判断key键是否在数组中
- * 使用选择排序和半折搜索
- *
- * @author Administrator
+ * author youlanqiang
  */
 public class SortAndSearch {
 

@@ -170,7 +170,7 @@ public class MyClientSocketGUI extends JFrame {
     }
 
 
-    public class MyClientSocket extends Thread{
+    public class MyClientSocket {
 
         private Socket socket;
         private OutputStream outputStream;

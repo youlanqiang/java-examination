@@ -16,6 +16,7 @@ public class SortAndSearch {
                 String[] arr = param.split(" ");
                 nums = new int[arr.length];
                 for (int i = 0; i < arr.length; i++) {
+
                     nums[i] = Integer.parseInt(arr[i]);
                 }
                 nums = sort(nums);
@@ -32,7 +33,7 @@ public class SortAndSearch {
                 }
             }
         } catch (Exception e) {
-            System.err.println("抱歉程序出错已退出。");
+            System.err.println("抱歉程序出错已退出。请输入数字。");
             //e.printStackTrace();
         }
 

@@ -8,7 +8,6 @@ import java.math.RoundingMode;
 /**
  * Java实操题目
  * 基本图形编程：编写一个程序，实现一个简单的计算器界面，为该计算器加上适当的事件处理，完成计算功能。
- * 未完成的功能:  sqrt,%,1/X
  *
  * @author youlanqiang
  */
@@ -113,7 +112,11 @@ public class Calculator {
         }
         if("/".equals(op)){
             builder.append("/").append(value.stripTrailingZeros().toPlainString());
-            value = temp.divide(value, 6, RoundingMode.HALF_UP);
+            try {
+                value = temp.divide(value, 6, RoundingMode.HALF_UP);
+            }catch(java.lang.ArithmeticException e){
+                value = BigDecimal.ZERO;
+            }
         }
         builder.append("=").append(value.stripTrailingZeros().toPlainString()).append("\n");
         //去掉小数点后面多余的0
